@@ -37,7 +37,7 @@ function Home() {
             data-testid="hero-title"
           >
             Welcome to{' '}
-            <Text as="span" color="blue" highContrast>
+            <Text as="span" color="amber" >
               ShopCart
             </Text>
           </Heading>
