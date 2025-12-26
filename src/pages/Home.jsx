@@ -28,12 +28,12 @@ function Home() {
   ];
   return (
     <div>
-      <Section style={{ padding: '5rem 1rem' /* py-20 px-4 */ }}>
+      <Section style={{ padding: '5rem 1rem' }}>
         <Container size="3" style={{ margin: '0 auto', textAlign: 'center' }}>
           <Heading
             as="h1"
             size="9"
-            style={{ fontWeight: 800, marginBottom: '1.5rem' }} // mb-6
+            style={{ fontWeight: 800, marginBottom: '1.5rem' }}
             data-testid="hero-title"
           >
             Welcome to{' '}
@@ -47,8 +47,8 @@ function Home() {
             size="5"
             color="gray"
             style={{
-              marginBottom: '2rem', // mb-8
-              maxWidth: '42rem',     // max-w-2xl
+              marginBottom: '2rem',
+              maxWidth: '42rem',
               marginLeft: 'auto',
               marginRight: 'auto',
             }}
@@ -69,7 +69,6 @@ function Home() {
         </Container>
       </Section>
 
-      {/* Features Section (Radix Themes) */}
       <Section style={{ padding: '4rem 1rem', backgroundColor: 'var(--gray-a3)' }}>
         <Container size="3" style={{ margin: '0 auto' }}>
           <Heading
@@ -98,17 +97,15 @@ function Home() {
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        marginBottom: 16
+                        marginBottom: '1rem',
                       }}
                     >
-                      <Icon size={24} color="var(--accent-9)" aria-hidden />
+                      <Icon size={24} style={{ color: 'var(--accent-9)' }} />
                     </Box>
-
-                    <Heading as="h3" size="3" align="center" data-testid={`feature-title-${index}`}>
+                    <Heading as="h3" size="4" style={{ marginBottom: '0.5rem' }} data-testid={`feature-title-${index}`}>
                       {feature.title}
                     </Heading>
-
-                    <Text as="p" color="gray" align="center" data-testid={`feature-description-${index}`}>
+                    <Text size="2" color="gray" align="center" data-testid={`feature-description-${index}`}>
                       {feature.description}
                     </Text>
                   </Flex>
@@ -116,34 +113,6 @@ function Home() {
               );
             })}
           </Grid>
-        </Container>
-      </Section>
-
-      {/* CTA Section */}
-      <Section style={{ padding: '5rem 1rem' }}>
-        <Container size="3" style={{ margin: '0 auto', textAlign: 'center' }}>
-          <Heading
-            as="h2"
-            size="6"
-            style={{ fontWeight: 700, marginBottom: '1.5rem' }}
-            data-testid="cta-title"
-          >
-            Ready to Start Shopping?
-          </Heading>
-          <Text
-            as="p"
-            size="5"
-            color="gray"
-            style={{ marginBottom: '2rem' }}
-            data-testid="cta-description"
-          >
-            Browse our collection and find exactly what you're looking for.
-          </Text>
-          <Button size="4" asChild data-testid="cta-explore-products">
-            <Link to="/shop" style={{ paddingLeft: '2rem', paddingRight: '2rem' }}>
-              Explore Products
-            </Link>
-          </Button>
         </Container>
       </Section>
     </div>

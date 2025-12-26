@@ -12,10 +12,7 @@ import {
   Text,
 } from '@radix-ui/themes';
 
-// Assuming CartItem component is adapted to use Radix UI as well
 import CartItem from '../components/CartItem';
-
-// Define the component's props interface for TypeScript (optional but good practice)
 
 
 export default function Cart({
@@ -29,7 +26,6 @@ export default function Cart({
   const totalPrice = getTotalPrice();
   const totalItems = getTotalItems();
 
-  // --- Empty Cart View ---
   if (items.length === 0) {
     return (
       <Container size="2" px="4" py="8">
@@ -43,7 +39,7 @@ export default function Cart({
           <ShoppingBag
             width="96"
             height="96"
-            className="text-gray-400" // Using className for color as lucide-react doesn't have a color prop
+            className="text-gray-400"
           />
           <Heading size="8" align="center" data-testid="empty-cart-title">
             Your cart is empty
@@ -69,10 +65,8 @@ export default function Cart({
     );
   }
 
-  // --- Cart View with Items ---
   return (
     <Container px="4" py="8">
-      {/* Header */}
       <Flex align="center" gap="4" mb="8">
         <Link to="/shop">
           <Button variant="ghost" size="2" data-testid="back-to-shop">
@@ -86,7 +80,6 @@ export default function Cart({
       </Flex>
 
       <Grid columns={{ initial: '1', md: '3' }} gap="6">
-        {/* Cart Items List */}
         <Box gridColumn={{ initial: '1', md: 'span 2' }}>
           <Flex direction="column" gap="4" data-testid="cart-items-list">
             {items.map((item) => (
@@ -109,7 +102,6 @@ export default function Cart({
           </Flex>
         </Box>
 
-        {/* Order Summary Card */}
         <Box gridColumn={{ initial: '1', md: 'span 1' }}>
           <Card data-testid="order-summary">
             <Flex direction="column" gap="4">
@@ -148,8 +140,9 @@ export default function Cart({
               <Link to="/shop">
                 <Button
                   variant="outline"
+                  size="2"
                   style={{ width: '100%' }}
-                  data-testid="continue-shopping-cart"
+                  data-testid="continue-shopping-summary"
                 >
                   Continue Shopping
                 </Button>

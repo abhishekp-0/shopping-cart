@@ -32,10 +32,8 @@ const useProducts = () => {
                 }
 
                 const data = await response.json();
-                // Only include ProductsfetchProducts with a valid image
                 setProducts(data);
             } catch (error) {
-                // Fallback card if API fetch fails
                 console.log("Could not fetch Products:", error);
                 setProductsError(error);
             } finally{
@@ -92,7 +90,6 @@ function Shop({addToCart}) {
             Shop Products
           </Heading>
 
-          {/* Products Grid */}
           <Grid
               columns={{ initial: '1', sm: '2', md: '3', lg: '4' }}
               gap="6"
@@ -106,9 +103,6 @@ function Shop({addToCart}) {
                 />
               ))}
             </Grid>
-          
-
-          {/* No results */}
         </Container>
       </Section>
     </Box>

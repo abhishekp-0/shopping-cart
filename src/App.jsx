@@ -9,7 +9,6 @@ import NotFound from './pages/NotFound';
 
 
 function App() {
-  // Correct the cart state to be an array of objects with a 'quantity' property
   const [cart,setCart] = useState([]);
 
   const addToCart = (product, quantity) => {
@@ -27,8 +26,6 @@ function App() {
       }
     });
   };
-
-  //items,getTotalPrice,getTotalItems,clearCart,updateQuantity,removeFromCart,
 
   const updateQuantity = (productId, quantity) => {
     if (quantity <= 0) {

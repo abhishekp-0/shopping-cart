@@ -17,14 +17,12 @@ const Navbar = ({ cart = [] }) => {
     <Box style={{ borderBottom: '1px solid var(--gray-a6)', backdropFilter: 'blur(6px)' }} px="5" py="3">
       <Container px="4">
         <Flex justify="between" align="center">
-          {/* Brand */}
           <Link asChild>
             <RouterLink to="/">
               <Text size="5" weight="bold">ShopCart</Text>
             </RouterLink>
           </Link>
 
-            {/* Nav Items */}
             <Flex gap="3" align="center">
               {navItems.map(item => {
                 const isActive = location.pathname === item.path;

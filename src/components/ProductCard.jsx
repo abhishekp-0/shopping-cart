@@ -28,7 +28,6 @@ export default function ProductCard({ product, addToCart }) {
     setQuantity(1);
   };
 
-  // Guard against product being null or undefined
   if (!product) {
     return null;
   }
@@ -36,7 +35,6 @@ export default function ProductCard({ product, addToCart }) {
   return (
     <Card size="2" style={{ height: '100%' }}>
       <Flex direction="column" style={{ height: '100%' }}>
-        {/* Image */}
         <Inset clip="padding-box" side="top" pb="current">
           <Box
             style={{
@@ -53,7 +51,7 @@ export default function ProductCard({ product, addToCart }) {
               style={{
                 width: '100%',
                 height: '100%',
-                objectFit: 'contain', // Use 'contain' to see the whole product
+                objectFit: 'contain',
                 padding: '8px',
               }}
               data-testid={`product-image-${product.id}`}
@@ -61,7 +59,6 @@ export default function ProductCard({ product, addToCart }) {
           </Box>
         </Inset>
 
-        {/* Content */}
         <Flex direction="column" p="4" style={{ flexGrow: 1 }}>
           <Badge variant="soft" mb="2" data-testid={`product-category-${product.id}`}>
             {product.category}
@@ -81,7 +78,7 @@ export default function ProductCard({ product, addToCart }) {
               WebkitLineClamp: 3,
               WebkitBoxOrient: 'vertical',
               overflow: 'hidden',
-              flexGrow: 1, // Allow description to take up space
+              flexGrow: 1,
             }}
             data-testid={`product-description-${product.id}`}
           >
@@ -98,58 +95,55 @@ export default function ProductCard({ product, addToCart }) {
             >
               ${Number(product.price).toFixed(2)}
             </Text>
-            <Flex align="center" gap="1" style={{ color: 'var(--gray-11)' }}>
-              <span aria-hidden>★</span>
-              <Text size="1" data-testid={`product-rating-${product.id}`}>
-                {product.rating?.rate ?? '—'} ({product.rating?.count ?? 0})
-              </Text>
+            {product.rating && (
+              <Flex align="center" gap="1">
+                <Text size="2" color="gray" data-testid={`product-rating-${product.id}`}>
+                  ⭐ {product.rating.rate}
+                </Text>
+              </Flex>
+            )}
+          </Flex>
+
+          <Flex direction="column" gap="3" mt="auto">
+            <Flex align="center" gap="2">
+              <IconButton
+                variant="outline"
+                onClick={handleDecrement}
+                disabled={quantity <= 1}
+                data-testid={`product-decrement-${product.id}`}
+                aria-label="Decrease quantity"
+              >
+                <Minus size={14} />
+              </IconButton>
+
+              <TextField.Root
+                value={quantity.toString()}
+                onChange={(e) => handleQuantityChange(e.target.value)}
+                style={{ width: '60px', textAlign: 'center' }}
+                data-testid={`product-quantity-${product.id}`}
+                aria-label="Quantity"
+              />
+
+              <IconButton
+                variant="outline"
+                onClick={handleIncrement}
+                data-testid={`product-increment-${product.id}`}
+                aria-label="Increase quantity"
+              >
+                <Plus size={14} />
+              </IconButton>
             </Flex>
+
+            <Button
+              size="2"
+              onClick={handleAddToCart}
+              data-testid={`add-to-cart-${product.id}`}
+            >
+              <ShoppingCart size={16} />
+              Add to Cart
+            </Button>
           </Flex>
         </Flex>
-
-        {/* Actions */}
-        <Box px="4" pb="4">
-          <Flex align="center" gap="2" width="100%" mb="3">
-            <IconButton
-              variant="soft"
-              disabled={quantity <= 1}
-              onClick={handleDecrement}
-              data-testid={`product-decrement-${product.id}`}
-              aria-label="Decrease quantity"
-            >
-              <Minus size={16} />
-            </IconButton>
-
-            <TextField.Root
-              type="number"
-              min="1"
-              value={String(quantity)}
-              onChange={(e) => handleQuantityChange(e.target.value)}
-              aria-label="Quantity"
-              data-testid={`product-quantity-input-${product.id}`}
-              style={{ flex: 1, textAlign: 'center' }}
-            />
-
-            <IconButton
-              variant="soft"
-              onClick={handleIncrement}
-              data-testid={`product-increment-${product.id}`}
-              aria-label="Increase quantity"
-            >
-              <Plus size={16} />
-            </IconButton>
-          </Flex>
-
-          <Button
-            size="3"
-            onClick={handleAddToCart}
-            style={{ width: '100%' }}
-            data-testid={`product-add-to-cart-${product.id}`}
-          >
-            <ShoppingCart size={16} style={{ marginRight: 8 }} />
-            Add to Cart
-          </Button>
-        </Box>
       </Flex>
     </Card>
   );

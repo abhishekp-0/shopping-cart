@@ -8,9 +8,7 @@ import {
   IconButton,
   Text,
   TextField,
-} from '@radix-ui/themes'; // Assuming this type import is correct
-
-// Define the component's props, including the handler functions
+} from '@radix-ui/themes';
 
 
 export default function CartItem({
@@ -20,10 +18,8 @@ export default function CartItem({
 }) {
   const { product, quantity } = item;
 
-  // --- Event Handlers ---
   const handleQuantityChange = (value) => {
     const num = parseInt(value, 10);
-    // Update only if it's a valid positive number
     if (!isNaN(num) && num > 0) {
       updateQuantity(product.id, num);
     }
@@ -34,7 +30,6 @@ export default function CartItem({
   };
 
   const handleDecrement = () => {
-    // Prevent quantity from going below 1
     if (quantity > 1) {
       updateQuantity(product.id, quantity - 1);
     }
@@ -49,12 +44,11 @@ export default function CartItem({
   return (
     <Card data-testid={`cart-item-${product.id}`}>
       <Grid columns={{ initial: "64px 1fr", sm: "80px 1fr auto" }} gap="4" align="center">
-        {/* Product Image */}
         <Box
           width={{ initial: '64px', sm: '80px' }}
           height={{ initial: '64px', sm: '80px' }}
-          style={{ borderRadius: 'var(--radius-3)' }} // Uses Radix theme variable for border radius
-          className="rt-bg-accent" // A simple background color from Radix
+          style={{ borderRadius: 'var(--radius-3)' }}
+          className="rt-bg-accent"
         >
           <img
             src={product.image}
@@ -64,9 +58,7 @@ export default function CartItem({
           />
         </Box>
 
-        {/* Product Details & Quantity Controls (combined for better mobile layout) */}
         <Flex justify="between" align="center" wrap="wrap" gap="4">
-          {/* Title, Category, and Price */}
           <Box>
             <Heading as="h3" size="4" trim="start" mb="1" data-testid={`cart-item-title-${product.id}`}>
               {product.title}
@@ -79,7 +71,6 @@ export default function CartItem({
             </Text>
           </Box>
 
-          {/* Quantity and Actions */}
           <Flex direction="column" align="end" gap="2">
              <IconButton
               variant="ghost"
@@ -97,36 +88,36 @@ export default function CartItem({
                 onClick={handleDecrement}
                 disabled={quantity <= 1}
                 data-testid={`cart-item-decrement-${product.id}`}
-                 aria-label="Decrease quantity"
+                aria-label="Decrease quantity"
               >
-                <Minus size={16} />
+                <Minus size={14} />
               </IconButton>
+
               <TextField.Root
-                type="number"
-                value={String(quantity)}
+                value={quantity.toString()}
                 onChange={(e) => handleQuantityChange(e.target.value)}
-                min={1}
-                style={{ width: '55px', textAlign: 'center' }}
+                style={{ width: '60px', textAlign: 'center' }}
                 data-testid={`cart-item-quantity-${product.id}`}
-                aria-label="Item quantity"
+                aria-label="Quantity"
               />
+
               <IconButton
                 variant="outline"
                 onClick={handleIncrement}
                 data-testid={`cart-item-increment-${product.id}`}
                 aria-label="Increase quantity"
               >
-                <Plus size={16} />
+                <Plus size={14} />
               </IconButton>
             </Flex>
-            
-             <Box mt="1" style={{ textAlign: 'right' }}>
-              <Text size="2" color="gray">Subtotal</Text>
-              <Text as="p" weight="bold" size="4" data-testid={`cart-item-subtotal-${product.id}`}>
-                ${subtotal.toFixed(2)}
-              </Text>
-            </Box>
           </Flex>
+        </Flex>
+
+        <Flex direction="column" align={{ initial: 'start', sm: 'end' }} gap="1" style={{ gridColumn: { initial: '1 / -1', sm: 'auto' } }}>
+          <Text size="2" color="gray">Subtotal</Text>
+          <Text size="5" weight="bold" data-testid={`cart-item-subtotal-${product.id}`}>
+            ${subtotal.toFixed(2)}
+          </Text>
         </Flex>
       </Grid>
     </Card>
